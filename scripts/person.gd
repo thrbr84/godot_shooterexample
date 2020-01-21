@@ -3,6 +3,7 @@ extends KinematicBody2D
 onready var bullet = preload("res://scenes/bullet.tscn")
 # // Variáveis com opção para exportar para serem customizadas
 export(int) var walk_speed:int = 300
+var ground = "res://assets/audio/footsteps_grass.ogg"
 
 # // Variáveis básicas
 var speed = 0
@@ -82,9 +83,12 @@ func _on_btnShoot_pressed():
 func _on_analog_analogChange(force, direction):
 	
 	# ajusta a velocidade das pegadas no audio
-	$footstep.pitch_scale = clamp(2.0 * force, .5, 3.0)
+	var groundLoaded = load(ground)
+	if $footstep.stream != groundLoaded:
+		$footstep.stream = groundLoaded
+	$footstep.pitch_scale = clamp(1.0 * force, .5, 1.5)
 	# ajusta o volume das pegadas
-	$footstep.volume_db = -(15.0 - (15.0 * force))
+	$footstep.volume_db = -(10.0 - (10.0 * force))
 
 	# Movimentação pelo analógico
 	speed = walk_speed * (force * .5)

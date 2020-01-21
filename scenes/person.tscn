@@ -4,7 +4,7 @@
 [ext_resource path="res://scripts/person.gd" type="Script" id=2]
 [ext_resource path="res://assets/fire/Shoot-blast-A.png" type="Texture" id=3]
 [ext_resource path="res://assets/fire/Shoot-blast-B.png" type="Texture" id=4]
-[ext_resource path="res://assets/audio/footstep.ogg" type="AudioStream" id=5]
+[ext_resource path="res://assets/audio/footsteps_grass.ogg" type="AudioStream" id=5]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
@@ -17,7 +17,11 @@ animations = [ {
 [sub_resource type="CircleShape2D" id=2]
 radius = 67.9734
 
-[node name="person" type="KinematicBody2D"]
+[node name="person" type="KinematicBody2D" groups=[
+"player",
+]]
+collision_layer = 5
+collision_mask = 6
 script = ExtResource( 2 )
 
 [node name="shadow" type="Sprite" parent="."]
@@ -46,4 +50,3 @@ shape = SubResource( 2 )
 
 [node name="footstep" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 5 )
-volume_db = -15.0

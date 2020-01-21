@@ -10,7 +10,7 @@
 [ext_resource path="res://assets/audio/dropbox.ogg" type="AudioStream" id=8]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 56.9228, 57.7984 )
+extents = Vector2( 67, 69 )
 
 [sub_resource type="SpriteFrames" id=2]
 animations = [ {
@@ -23,6 +23,7 @@ animations = [ {
 [node name="box" type="StaticBody2D" groups=[
 "box",
 ]]
+collision_layer = 5
 collision_mask = 2
 script = ExtResource( 2 )
 
@@ -32,8 +33,8 @@ shape = SubResource( 1 )
 [node name="frag1" type="RigidBody2D" parent="."]
 collision_mask = 2
 gravity_scale = 0.0
-linear_damp = 2.0
-angular_damp = 2.0
+linear_damp = 5.0
+angular_damp = 5.0
 
 [node name="frag1" type="Polygon2D" parent="frag1"]
 position = Vector2( -0.304878, -0.126827 )
@@ -48,11 +49,19 @@ position = Vector2( -0.304878, -0.126827 )
 scale = Vector2( 0.215025, 0.215025 )
 polygon = PoolVector2Array( -254.951, -257.306, 14.5638, -257.306, -115.202, -190.427, 98.4128, -88.6104, -98.233, -70.6428, -60.3013, 74.0965, -148.143, 80.0857, -204.042, -15.7416, -254.951, 9.21341 )
 
+[node name="Area2D" type="Area2D" parent="frag1"]
+collision_mask = 4
+
+[node name="frag3" type="CollisionPolygon2D" parent="frag1/Area2D"]
+position = Vector2( -0.304878, -0.126827 )
+scale = Vector2( 0.215025, 0.215025 )
+polygon = PoolVector2Array( -254.951, -257.306, 14.5638, -257.306, -115.202, -190.427, 98.4128, -88.6104, -98.233, -70.6428, -60.3013, 74.0965, -148.143, 80.0857, -204.042, -15.7416, -254.951, 9.21341 )
+
 [node name="frag2" type="RigidBody2D" parent="."]
 collision_mask = 2
 gravity_scale = 0.0
-linear_damp = 2.0
-angular_damp = 2.0
+linear_damp = 5.0
+angular_damp = 5.0
 
 [node name="frag2" type="Polygon2D" parent="frag2"]
 position = Vector2( -0.304878, -0.126827 )
@@ -67,11 +76,19 @@ position = Vector2( -0.304878, -0.126827 )
 scale = Vector2( 0.215025, 0.215025 )
 polygon = PoolVector2Array( 19.5548, -257.306, -113.206, -189.429, 99.411, -87.6122, -98.233, -72.6392, -60.3013, 74.0965, -147.145, 80.0857, 17.5584, 107.037, 35.5261, 6.21881, 160.301, 107.037, 256.129, -1.76682, 256.129, -258.305 )
 
+[node name="Area2D2" type="Area2D" parent="frag2"]
+collision_mask = 4
+
+[node name="frag4" type="CollisionPolygon2D" parent="frag2/Area2D2"]
+position = Vector2( -0.304878, -0.126827 )
+scale = Vector2( 0.215025, 0.215025 )
+polygon = PoolVector2Array( 19.5548, -257.306, -113.206, -189.429, 99.411, -87.6122, -98.233, -72.6392, -60.3013, 74.0965, -147.145, 80.0857, 17.5584, 107.037, 35.5261, 6.21881, 160.301, 107.037, 256.129, -1.76682, 256.129, -258.305 )
+
 [node name="frag3" type="RigidBody2D" parent="."]
 collision_mask = 2
 gravity_scale = 0.0
-linear_damp = 2.0
-angular_damp = 2.0
+linear_damp = 5.0
+angular_damp = 5.0
 
 [node name="frag3" type="Polygon2D" parent="frag3"]
 position = Vector2( -0.304878, -0.126827 )
@@ -86,11 +103,19 @@ position = Vector2( -0.304878, -0.126827 )
 scale = Vector2( 0.215025, 0.215025 )
 polygon = PoolVector2Array( -254.951, 8.21521, -204.042, -15.7416, -146.147, 82.0822, 17.5584, 105.041, 56.4883, 158.944, -30.3553, 154.951, 84.6628, 257.49, -255.906, 256.2 )
 
+[node name="Area2D3" type="Area2D" parent="frag3"]
+collision_mask = 4
+
+[node name="frag5" type="CollisionPolygon2D" parent="frag3/Area2D3"]
+position = Vector2( -0.304878, -0.126827 )
+scale = Vector2( 0.215025, 0.215025 )
+polygon = PoolVector2Array( -254.951, 8.21521, -204.042, -15.7416, -146.147, 82.0822, 17.5584, 105.041, 56.4883, 158.944, -30.3553, 154.951, 84.6628, 257.49, -255.906, 256.2 )
+
 [node name="frag4" type="RigidBody2D" parent="."]
 collision_mask = 2
 gravity_scale = 0.0
-linear_damp = 2.0
-angular_damp = 2.0
+linear_damp = 5.0
+angular_damp = 5.0
 
 [node name="frag4" type="Polygon2D" parent="frag4"]
 position = Vector2( -0.304878, -0.126827 )
@@ -101,6 +126,14 @@ polygon = PoolVector2Array( 254.947, 0.773895, 160.775, 106.556, 35.6415, 4.644,
 uv = PoolVector2Array( 513.117, 255.676, 418.945, 361.458, 293.811, 259.546, 277.041, 358.878, 317.032, 413.06, 228.02, 410.48, 341.543, 511.102, 513.117, 511.102 )
 
 [node name="frag5" type="CollisionPolygon2D" parent="frag4"]
+position = Vector2( -0.304878, -0.126827 )
+scale = Vector2( 0.215025, 0.215025 )
+polygon = PoolVector2Array( 254.947, 0.773895, 160.775, 106.556, 35.6415, 4.644, 18.8712, 103.976, 58.8622, 158.158, -30.15, 155.578, 83.3727, 256.2, 254.947, 256.2 )
+
+[node name="Area2D4" type="Area2D" parent="frag4"]
+collision_mask = 4
+
+[node name="frag6" type="CollisionPolygon2D" parent="frag4/Area2D4"]
 position = Vector2( -0.304878, -0.126827 )
 scale = Vector2( 0.215025, 0.215025 )
 polygon = PoolVector2Array( 254.947, 0.773895, 160.775, 106.556, 35.6415, 4.644, 18.8712, 103.976, 58.8622, 158.158, -30.15, 155.578, 83.3727, 256.2, 254.947, 256.2 )
@@ -117,4 +150,12 @@ frames = SubResource( 2 )
 
 [node name="dropBox" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 8 )
-volume_db = -10.0
+volume_db = -5.0
+[connection signal="body_exited" from="frag1/Area2D" to="." method="_on_footsteps_body_exited"]
+[connection signal="body_shape_entered" from="frag1/Area2D" to="." method="_on_footsteps_body_shape_entered"]
+[connection signal="body_exited" from="frag2/Area2D2" to="." method="_on_footsteps_body_exited"]
+[connection signal="body_shape_entered" from="frag2/Area2D2" to="." method="_on_footsteps_body_shape_entered"]
+[connection signal="body_exited" from="frag3/Area2D3" to="." method="_on_footsteps_body_exited"]
+[connection signal="body_shape_entered" from="frag3/Area2D3" to="." method="_on_footsteps_body_shape_entered"]
+[connection signal="body_exited" from="frag4/Area2D4" to="." method="_on_footsteps_body_exited"]
+[connection signal="body_shape_entered" from="frag4/Area2D4" to="." method="_on_footsteps_body_shape_entered"]
