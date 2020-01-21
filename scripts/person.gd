@@ -9,6 +9,7 @@ var speed = 0
 var dir = Vector2.ZERO
 var tween = Tween.new()
 var dirOld
+var arrShot = []
 
 func _ready():
 	add_child(tween)
@@ -54,6 +55,16 @@ func _shoot():
 	$body/fire.frame = 0
 	$body/fire.playing = true
 	
+	# audio da bala
+	var ashot = AudioStreamPlayer.new()
+	add_child(ashot)
+	ashot.stream = load("res://assets/audio/shot.ogg")
+	ashot.volume_db = -10
+	ashot.connect("finished", self, "_on_end_ashot")
+	arrShot.append(ashot)
+	ashot.play()
+
+	
 	var b = bullet.instance()
 	b.direction = dir if dirOld == null else dirOld
 	b.rotation = $body.rotation
@@ -78,3 +89,10 @@ func _on_analog_analogChange(force, direction):
 func _on_analog_analogRelease():
 	# quando soltar o analógico para de movimentar
 	dir = Vector2.ZERO
+
+func _on_end_ashot():
+	# Libera os audios da memoria
+	if arrShot.size() > 0:
+		if weakref(arrShot[0]).get_ref():
+			arrShot[0].queue_free()
+		arrShot.remove(0)

@@ -42,3 +42,5 @@ animation = "fire"
 
 [node name="collision" type="CollisionShape2D" parent="."]
 shape = SubResource( 2 )
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
