@@ -63,7 +63,7 @@ func _shoot():
 	var ashot = AudioStreamPlayer.new()
 	add_child(ashot)
 	ashot.stream = load("res://assets/audio/shot.ogg")
-	ashot.volume_db = -10
+	ashot.volume_db = -5
 	ashot.connect("finished", self, "_on_end_ashot")
 	arrShot.append(ashot)
 	ashot.play()

@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://scenes/person.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/background.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/box.tscn" type="PackedScene" id=3]
 [ext_resource path="res://addons/analog/analog.tscn" type="PackedScene" id=4]
 [ext_resource path="res://assets/btnShoot.png" type="Texture" id=5]
+[ext_resource path="res://assets/audio/ambiente.ogg" type="AudioStream" id=6]
 
 [node name="main" type="Node2D"]
 
@@ -33,16 +34,21 @@ position = Vector2( 61.0564, -606.041 )
 [node name="box6" parent="." instance=ExtResource( 3 )]
 position = Vector2( -489.908, 552.048 )
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="ui" type="CanvasLayer" parent="."]
 
-[node name="analog" parent="CanvasLayer" instance=ExtResource( 4 )]
+[node name="ambient" type="AudioStreamPlayer" parent="ui"]
+stream = ExtResource( 6 )
+volume_db = -10.0
+autoplay = true
+
+[node name="analog" parent="ui" instance=ExtResource( 4 )]
 position = Vector2( 179.057, 1120.07 )
 typeAnalogic = "360_vector2"
 
-[node name="btnShoot" type="TouchScreenButton" parent="CanvasLayer"]
+[node name="btnShoot" type="TouchScreenButton" parent="ui"]
 position = Vector2( 454.773, 1028.33 )
 scale = Vector2( 0.3563, 0.3563 )
 normal = ExtResource( 5 )
-[connection signal="analogChange" from="CanvasLayer/analog" to="person" method="_on_analog_analogChange"]
-[connection signal="analogRelease" from="CanvasLayer/analog" to="person" method="_on_analog_analogRelease"]
-[connection signal="pressed" from="CanvasLayer/btnShoot" to="person" method="_on_btnShoot_pressed"]
+[connection signal="analogChange" from="ui/analog" to="person" method="_on_analog_analogChange"]
+[connection signal="analogRelease" from="ui/analog" to="person" method="_on_analog_analogRelease"]
+[connection signal="pressed" from="ui/btnShoot" to="person" method="_on_btnShoot_pressed"]
