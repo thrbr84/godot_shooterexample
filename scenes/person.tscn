@@ -15,7 +15,7 @@ animations = [ {
 } ]
 
 [sub_resource type="CircleShape2D" id=2]
-radius = 67.9734
+radius = 83.1963
 
 [node name="person" type="KinematicBody2D" groups=[
 "player",

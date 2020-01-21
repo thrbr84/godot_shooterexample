@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=25 format=2]
 
 [ext_resource path="res://assets/box.png" type="Texture" id=1]
 [ext_resource path="res://scripts/box.gd" type="Script" id=2]
@@ -8,9 +8,22 @@
 [ext_resource path="res://assets/fumaca/frame5.png" type="Texture" id=6]
 [ext_resource path="res://assets/fumaca/frame4.png" type="Texture" id=7]
 [ext_resource path="res://assets/audio/dropbox.ogg" type="AudioStream" id=8]
+[ext_resource path="res://assets/nuclear.png" type="Texture" id=9]
+[ext_resource path="res://assets/burntmark.png" type="Texture" id=10]
+[ext_resource path="res://assets/explosion/explosion1.png" type="Texture" id=11]
+[ext_resource path="res://assets/explosion/explosion2.png" type="Texture" id=12]
+[ext_resource path="res://assets/explosion/explosion3.png" type="Texture" id=13]
+[ext_resource path="res://assets/explosion/explosion4.png" type="Texture" id=14]
+[ext_resource path="res://assets/explosion/explosion5.png" type="Texture" id=15]
+[ext_resource path="res://assets/explosion/explosionSmoke1.png" type="Texture" id=16]
+[ext_resource path="res://assets/explosion/explosionSmoke2.png" type="Texture" id=17]
+[ext_resource path="res://assets/explosion/explosionSmoke3.png" type="Texture" id=18]
+[ext_resource path="res://assets/explosion/explosionSmoke5.png" type="Texture" id=19]
+[ext_resource path="res://assets/explosion/explosionSmoke4.png" type="Texture" id=20]
+[ext_resource path="res://assets/audio/bomb.wav" type="AudioStream" id=21]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 67, 69 )
+extents = Vector2( 80.2971, 76.0591 )
 
 [sub_resource type="SpriteFrames" id=2]
 animations = [ {
@@ -18,6 +31,14 @@ animations = [ {
 "loop": false,
 "name": "default",
 "speed": 15.0
+} ]
+
+[sub_resource type="SpriteFrames" id=3]
+animations = [ {
+"frames": [ null, ExtResource( 11 ), ExtResource( 12 ), ExtResource( 13 ), ExtResource( 14 ), ExtResource( 15 ), ExtResource( 16 ), ExtResource( 17 ), ExtResource( 18 ), ExtResource( 20 ), ExtResource( 19 ), null ],
+"loop": false,
+"name": "default",
+"speed": 25.0
 } ]
 
 [node name="box" type="StaticBody2D" groups=[
@@ -155,6 +176,28 @@ volume_db = -5.0
 [node name="autoKill" type="Timer" parent="."]
 wait_time = 5.0
 one_shot = true
+
+[node name="nuclear" type="Sprite" parent="."]
+visible = false
+modulate = Color( 1, 1, 1, 0.772549 )
+position = Vector2( 0.436104, 1.29316 )
+z_index = 2
+texture = ExtResource( 9 )
+
+[node name="burntmark" type="Sprite" parent="."]
+visible = false
+modulate = Color( 1, 1, 1, 0.686275 )
+position = Vector2( -12.1075, -1.63367 )
+texture = ExtResource( 10 )
+
+[node name="explosion" type="AnimatedSprite" parent="."]
+position = Vector2( -2.3327, -1.16637 )
+scale = Vector2( 1.77757, 1.77757 )
+z_index = 2
+frames = SubResource( 3 )
+
+[node name="sfx" type="AudioStreamPlayer" parent="explosion"]
+stream = ExtResource( 21 )
 [connection signal="body_exited" from="frag1/Area2D" to="." method="_on_footsteps_body_exited"]
 [connection signal="body_shape_entered" from="frag1/Area2D" to="." method="_on_footsteps_body_shape_entered"]
 [connection signal="body_exited" from="frag2/Area2D2" to="." method="_on_footsteps_body_exited"]

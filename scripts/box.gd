@@ -1,18 +1,33 @@
 extends StaticBody2D
 
-signal explode
+var distance = 200
+var type = "normal"
+signal explode(type)
 
 func _ready():
+	randomize()
+	
 	$autoKill.wait_time = 15
 	$autoKill.start()
+	
+	if (randi()%10) % 2:
+		type = "nuclear"
+		distance = 1000
+		$nuclear.show()
 
 func _die():
 	$box.queue_free()
 	$collision.queue_free()
 	$fumaca.play()
 	$dropBox.play()
+	$nuclear.queue_free()
 	_explode()
-	emit_signal("explode")
+	emit_signal("explode", type)
+	
+	if type == "nuclear":
+		$burntmark.show()
+		$explosion.play()
+		$explosion/sfx.play()
 	
 func _explode():
 	# Explode a caixa em fragmentos
@@ -21,7 +36,7 @@ func _explode():
 			f.bounce = 0
 			f.angular_velocity = randf() * 10
 			var dir = randf() * (PI * 2)
-			f.apply_impulse(Vector2.ZERO, Vector2(cos(dir), sin(dir)) * 200 + Vector2(0,50))
+			f.apply_impulse(Vector2.ZERO, Vector2(cos(dir), sin(dir)) * distance + Vector2(0,50))
 
 func _on_footsteps_body_exited(body):
 	if body.is_in_group("player"):
@@ -35,7 +50,6 @@ func _on_footsteps_body_shape_entered(body_id, body, body_shape, area_shape):
 			var dir = randf() * (PI * 2)
 			rb.angular_velocity = randf() * 1
 			rb.apply_impulse(Vector2.ZERO, Vector2(cos(dir), sin(dir)) * 20)
-
 
 func _on_autoKill_timeout():
 	queue_free()
