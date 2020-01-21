@@ -1,30 +1,27 @@
 extends KinematicBody2D
 
+onready var bullet = preload("res://scenes/bullet.tscn")
 # // Variáveis com opção para exportar para serem customizadas
 export(int) var walk_speed:int = 300
-var tween = Tween.new()
-var dirOld
-
-onready var bullet = preload("res://scenes/bullet.tscn")
 
 # // Variáveis básicas
 var speed = 0
 var dir = Vector2.ZERO
+var tween = Tween.new()
+var dirOld
 
 func _ready():
 	add_child(tween)
 	speed = walk_speed
 
 func _physics_process(delta):
-	# regras de movimentação, animação e troca de textura do player
+	# regras de movimentação
 	_move()
 	# implementa o movimento no KinematicBody2D
 	dir = move_and_slide(dir)
 
 func _move()->void:
-	# ////////
-	
-	# inicia sem movimentação
+	# Movimentação pelo teclado
 	var LEFT:bool = Input.is_action_pressed("ui_left")
 	var RIGHT:bool = Input.is_action_pressed("ui_right")
 	var UP:bool = Input.is_action_pressed("ui_up")
@@ -45,11 +42,15 @@ func _move()->void:
 			dirOld = dir
 
 func _unhandled_input(event):
+	# Atirar apertando o espaço do teclado
 	if event is InputEventKey:
+		if !event.is_pressed():
+			dir = Vector2.ZERO
 		if event.is_action_pressed("ui_select"):
 			_shoot()
 			
 func _shoot():
+	# Função para atirar
 	$body/fire.frame = 0
 	$body/fire.playing = true
 	
@@ -60,9 +61,11 @@ func _shoot():
 	get_parent().add_child(b)
 
 func _on_btnShoot_pressed():
+	# Atirar pelo botão
 	_shoot()
 
 func _on_analog_analogChange(force, direction):
+	# Movimentação pelo analógico
 	speed = walk_speed * (force * .5)
 	dir.x = (direction.x * (PI)) * speed
 	dir.y = (direction.y * -(PI)) * speed
@@ -73,4 +76,5 @@ func _on_analog_analogChange(force, direction):
 	dirOld = dir
 
 func _on_analog_analogRelease():
+	# quando soltar o analógico para de movimentar
 	dir = Vector2.ZERO

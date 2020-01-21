@@ -14,5 +14,6 @@ func _on_visibility_screen_exited():
 	queue_free()
 
 func _on_Area2D_body_entered(body):
+	# Se colidir com uma caixa...
 	if body.is_in_group("box"):
 		body._die()
