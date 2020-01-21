@@ -1,0 +1,48 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://scenes/person.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scenes/background.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scenes/box.tscn" type="PackedScene" id=3]
+[ext_resource path="res://addons/analog/analog.tscn" type="PackedScene" id=4]
+[ext_resource path="res://assets/btnShoot.png" type="Texture" id=5]
+
+[node name="main" type="Node2D"]
+
+[node name="person" parent="." instance=ExtResource( 1 )]
+
+[node name="camera" type="Camera2D" parent="person"]
+current = true
+
+[node name="ParallaxBackground" parent="." instance=ExtResource( 2 )]
+
+[node name="box" parent="." instance=ExtResource( 3 )]
+position = Vector2( 377.3, 67.668 )
+
+[node name="box2" parent="." instance=ExtResource( 3 )]
+position = Vector2( 650.023, -217.358 )
+
+[node name="box3" parent="." instance=ExtResource( 3 )]
+position = Vector2( 586.456, -330.138 )
+
+[node name="box4" parent="." instance=ExtResource( 3 )]
+position = Vector2( -332.188, -346.542 )
+
+[node name="box5" parent="." instance=ExtResource( 3 )]
+position = Vector2( 61.0564, -606.041 )
+
+[node name="box6" parent="." instance=ExtResource( 3 )]
+position = Vector2( -489.908, 552.048 )
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="analog" parent="CanvasLayer" instance=ExtResource( 4 )]
+position = Vector2( 179.057, 1120.07 )
+typeAnalogic = "360_vector2"
+
+[node name="btnShoot" type="TouchScreenButton" parent="CanvasLayer"]
+position = Vector2( 454.773, 1028.33 )
+scale = Vector2( 0.3563, 0.3563 )
+normal = ExtResource( 5 )
+[connection signal="analogChange" from="CanvasLayer/analog" to="person" method="_on_analog_analogChange"]
+[connection signal="analogRelease" from="CanvasLayer/analog" to="person" method="_on_analog_analogRelease"]
+[connection signal="pressed" from="CanvasLayer/btnShoot" to="person" method="_on_btnShoot_pressed"]

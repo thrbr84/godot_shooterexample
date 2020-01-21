@@ -1,0 +1,44 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://assets/person.png" type="Texture" id=1]
+[ext_resource path="res://scripts/person.gd" type="Script" id=2]
+[ext_resource path="res://assets/fire/Shoot-blast-A.png" type="Texture" id=3]
+[ext_resource path="res://assets/fire/Shoot-blast-B.png" type="Texture" id=4]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ null, ExtResource( 3 ), ExtResource( 4 ), null ],
+"loop": false,
+"name": "fire",
+"speed": 20.0
+} ]
+
+[sub_resource type="CircleShape2D" id=2]
+radius = 67.9734
+
+[node name="person" type="KinematicBody2D"]
+script = ExtResource( 2 )
+
+[node name="shadow" type="Sprite" parent="."]
+modulate = Color( 0, 0, 0, 0.411765 )
+position = Vector2( -0.0181425, 0.108299 )
+scale = Vector2( 1.09031, 1.2273 )
+texture = ExtResource( 1 )
+offset = Vector2( 38.8391, -6.4425 )
+
+[node name="body" type="Sprite" parent="."]
+z_index = 9
+texture = ExtResource( 1 )
+offset = Vector2( 41.843, -9.56293 )
+
+[node name="drop" type="Position2D" parent="body"]
+position = Vector2( 148.78, 29.4278 )
+
+[node name="fire" type="AnimatedSprite" parent="body"]
+position = Vector2( 169.062, 29.5071 )
+scale = Vector2( 0.089437, 0.0894369 )
+frames = SubResource( 1 )
+animation = "fire"
+
+[node name="collision" type="CollisionShape2D" parent="."]
+shape = SubResource( 2 )
