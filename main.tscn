@@ -31,23 +31,23 @@ volume_db = -10.0
 autoplay = true
 
 [node name="analog" parent="ui" instance=ExtResource( 4 )]
-position = Vector2( 179.057, 1120.07 )
+position = Vector2( 173.057, 1120.07 )
 typeAnalogic = "360_vector2"
 
 [node name="btnShoot" type="TouchScreenButton" parent="ui"]
-position = Vector2( 454.773, 1028.33 )
+position = Vector2( 459.773, 1028.33 )
 scale = Vector2( 0.3563, 0.3563 )
 normal = ExtResource( 5 )
 passby_press = true
 
 [node name="box" type="Sprite" parent="ui"]
-position = Vector2( 102.852, 95.687 )
+position = Vector2( 90.852, 95.687 )
 texture = ExtResource( 3 )
 
 [node name="boxCount" type="Label" parent="ui"]
-margin_left = 172.029
+margin_left = 160.029
 margin_top = 68.4775
-margin_right = 212.029
+margin_right = 200.029
 margin_bottom = 128.478
 custom_fonts/font = SubResource( 1 )
 text = "0"
