@@ -41,6 +41,10 @@ func _move()->void:
 			tween.start()
 			
 			dirOld = dir
+			
+	if dir != Vector2.ZERO:
+		if !$footstep.playing:
+			$footstep.play()
 
 func _unhandled_input(event):
 	# Atirar apertando o espaço do teclado
@@ -76,8 +80,14 @@ func _on_btnShoot_pressed():
 	_shoot()
 
 func _on_analog_analogChange(force, direction):
+	
+	# ajusta a velocidade das pegadas no audio
+	$footstep.pitch_scale = clamp(1.0 * force, .5, 2.5)
+	# ajusta o volume das pegadas
+	$footstep.volume_db = -(30 - (15.0*force))
+
 	# Movimentação pelo analógico
-	speed = walk_speed * (force * .5)
+	speed = walk_speed * (force * .3)
 	dir.x = (direction.x * (PI)) * speed
 	dir.y = (direction.y * -(PI)) * speed
 	
@@ -89,6 +99,7 @@ func _on_analog_analogChange(force, direction):
 func _on_analog_analogRelease():
 	# quando soltar o analógico para de movimentar
 	dir = Vector2.ZERO
+	#$footstep.stop()
 
 func _on_end_ashot():
 	# Libera os audios da memoria
