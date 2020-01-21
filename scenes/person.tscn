@@ -45,6 +45,9 @@ scale = Vector2( 0.089437, 0.0894369 )
 frames = SubResource( 1 )
 animation = "fire"
 
+[node name="boxDrop" type="Position2D" parent="body"]
+position = Vector2( 984.106, 32.3722 )
+
 [node name="collision" type="CollisionShape2D" parent="."]
 shape = SubResource( 2 )
 
