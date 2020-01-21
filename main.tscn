@@ -49,6 +49,7 @@ typeAnalogic = "360_vector2"
 position = Vector2( 454.773, 1028.33 )
 scale = Vector2( 0.3563, 0.3563 )
 normal = ExtResource( 5 )
+passby_press = true
 [connection signal="analogChange" from="ui/analog" to="person" method="_on_analog_analogChange"]
 [connection signal="analogRelease" from="ui/analog" to="person" method="_on_analog_analogRelease"]
 [connection signal="pressed" from="ui/btnShoot" to="person" method="_on_btnShoot_pressed"]

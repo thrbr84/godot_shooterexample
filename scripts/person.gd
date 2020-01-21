@@ -82,12 +82,12 @@ func _on_btnShoot_pressed():
 func _on_analog_analogChange(force, direction):
 	
 	# ajusta a velocidade das pegadas no audio
-	$footstep.pitch_scale = clamp(1.0 * force, .5, 2.5)
+	$footstep.pitch_scale = clamp(2.0 * force, .5, 3.0)
 	# ajusta o volume das pegadas
-	$footstep.volume_db = -(30 - (15.0*force))
+	$footstep.volume_db = -(20 - (5.0 * force))
 
 	# Movimentação pelo analógico
-	speed = walk_speed * (force * .3)
+	speed = walk_speed * (force * .5)
 	dir.x = (direction.x * (PI)) * speed
 	dir.y = (direction.y * -(PI)) * speed
 	
@@ -99,7 +99,7 @@ func _on_analog_analogChange(force, direction):
 func _on_analog_analogRelease():
 	# quando soltar o analógico para de movimentar
 	dir = Vector2.ZERO
-	#$footstep.stop()
+	$footstep.stop()
 
 func _on_end_ashot():
 	# Libera os audios da memoria
