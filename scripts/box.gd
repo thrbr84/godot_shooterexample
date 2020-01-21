@@ -1,11 +1,18 @@
 extends StaticBody2D
 
+signal explode
+
+func _ready():
+	$autoKill.wait_time = 15
+	$autoKill.start()
+
 func _die():
 	$box.queue_free()
 	$collision.queue_free()
 	$fumaca.play()
 	$dropBox.play()
 	_explode()
+	emit_signal("explode")
 	
 func _explode():
 	# Explode a caixa em fragmentos
@@ -28,3 +35,7 @@ func _on_footsteps_body_shape_entered(body_id, body, body_shape, area_shape):
 			var dir = randf() * (PI * 2)
 			rb.angular_velocity = randf() * 1
 			rb.apply_impulse(Vector2.ZERO, Vector2(cos(dir), sin(dir)) * 20)
+
+
+func _on_autoKill_timeout():
+	queue_free()

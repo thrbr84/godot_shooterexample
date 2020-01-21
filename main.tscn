@@ -1,13 +1,20 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://scenes/person.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/background.tscn" type="PackedScene" id=2]
-[ext_resource path="res://scenes/box.tscn" type="PackedScene" id=3]
+[ext_resource path="res://assets/boxicon.png" type="Texture" id=3]
 [ext_resource path="res://addons/analog/analog.tscn" type="PackedScene" id=4]
 [ext_resource path="res://assets/btnShoot.png" type="Texture" id=5]
 [ext_resource path="res://assets/audio/ambiente.ogg" type="AudioStream" id=6]
+[ext_resource path="res://scripts/main.gd" type="Script" id=7]
+[ext_resource path="res://assets/font/PoetsenOne-Regular.ttf" type="DynamicFontData" id=8]
+
+[sub_resource type="DynamicFont" id=1]
+size = 50
+font_data = ExtResource( 8 )
 
 [node name="main" type="Node2D"]
+script = ExtResource( 7 )
 
 [node name="person" parent="." instance=ExtResource( 1 )]
 
@@ -15,24 +22,6 @@
 current = true
 
 [node name="ParallaxBackground" parent="." instance=ExtResource( 2 )]
-
-[node name="box" parent="." instance=ExtResource( 3 )]
-position = Vector2( 377.3, 67.668 )
-
-[node name="box2" parent="." instance=ExtResource( 3 )]
-position = Vector2( 650.023, -217.358 )
-
-[node name="box3" parent="." instance=ExtResource( 3 )]
-position = Vector2( 586.456, -330.138 )
-
-[node name="box4" parent="." instance=ExtResource( 3 )]
-position = Vector2( -332.188, -346.542 )
-
-[node name="box5" parent="." instance=ExtResource( 3 )]
-position = Vector2( 61.0564, -606.041 )
-
-[node name="box6" parent="." instance=ExtResource( 3 )]
-position = Vector2( -489.908, 552.048 )
 
 [node name="ui" type="CanvasLayer" parent="."]
 
@@ -50,6 +39,26 @@ position = Vector2( 454.773, 1028.33 )
 scale = Vector2( 0.3563, 0.3563 )
 normal = ExtResource( 5 )
 passby_press = true
+
+[node name="box" type="Sprite" parent="ui"]
+position = Vector2( 102.852, 95.687 )
+texture = ExtResource( 3 )
+
+[node name="boxCount" type="Label" parent="ui"]
+margin_left = 172.029
+margin_top = 68.4775
+margin_right = 212.029
+margin_bottom = 128.478
+custom_fonts/font = SubResource( 1 )
+text = "0"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="boxSpawn" type="Timer" parent="."]
+wait_time = 2.0
+autostart = true
 [connection signal="analogChange" from="ui/analog" to="person" method="_on_analog_analogChange"]
 [connection signal="analogRelease" from="ui/analog" to="person" method="_on_analog_analogRelease"]
 [connection signal="pressed" from="ui/btnShoot" to="person" method="_on_btnShoot_pressed"]
+[connection signal="timeout" from="boxSpawn" to="." method="_on_boxSpawn_timeout"]

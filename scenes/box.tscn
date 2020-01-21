@@ -151,6 +151,10 @@ frames = SubResource( 2 )
 [node name="dropBox" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 8 )
 volume_db = -5.0
+
+[node name="autoKill" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
 [connection signal="body_exited" from="frag1/Area2D" to="." method="_on_footsteps_body_exited"]
 [connection signal="body_shape_entered" from="frag1/Area2D" to="." method="_on_footsteps_body_shape_entered"]
 [connection signal="body_exited" from="frag2/Area2D2" to="." method="_on_footsteps_body_exited"]
@@ -159,3 +163,4 @@ volume_db = -5.0
 [connection signal="body_shape_entered" from="frag3/Area2D3" to="." method="_on_footsteps_body_shape_entered"]
 [connection signal="body_exited" from="frag4/Area2D4" to="." method="_on_footsteps_body_exited"]
 [connection signal="body_shape_entered" from="frag4/Area2D4" to="." method="_on_footsteps_body_shape_entered"]
+[connection signal="timeout" from="autoKill" to="." method="_on_autoKill_timeout"]
