@@ -84,7 +84,7 @@ func _on_analog_analogChange(force, direction):
 	# ajusta a velocidade das pegadas no audio
 	$footstep.pitch_scale = clamp(2.0 * force, .5, 3.0)
 	# ajusta o volume das pegadas
-	$footstep.volume_db = -(20 - (5.0 * force))
+	$footstep.volume_db = -(15.0 - (15.0 * force))
 
 	# Movimentação pelo analógico
 	speed = walk_speed * (force * .5)
