@@ -4,6 +4,7 @@ func _die():
 	$box.queue_free()
 	$collision.queue_free()
 	$fumaca.play()
+	$dropBox.play()
 	
 	# Explode a caixa em fragmentos
 	for f in get_children():
