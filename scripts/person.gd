@@ -67,9 +67,8 @@ func _on_analog_analogChange(force, direction):
 	dir.x = (direction.x * (PI)) * speed
 	dir.y = (direction.y * -(PI)) * speed
 	
-	tween.interpolate_property($shadow, "rotation", $body.rotation, dir.angle(), .1, Tween.TRANS_LINEAR, Tween.EASE_IN)
-	tween.interpolate_property($body, "rotation", $body.rotation, dir.angle(), .1, Tween.TRANS_LINEAR, Tween.EASE_IN)
-	tween.start()
+	$body.rotation = dir.angle()
+	$shadow.rotation = dir.angle()
 	
 	dirOld = dir
 
